@@ -9,7 +9,7 @@ namespace _20T1020670.Web.Models
     public class ProductModel : Product
     {
 
-        public List<ProductAttribute>  Atrribute { get; set; }
+        public List<ProductAttribute>  Attributes { get; set; }
         public List<ProductPhoto>  Photos { get; set;  }
     }
 }

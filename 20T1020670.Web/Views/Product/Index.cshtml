@@ -2,24 +2,19 @@
 
 
 
-@{
-    ViewBag.Title = "Quản lý Mặt hàng";
-}
+@{ ViewBag.Title = "Quản lý Mặt hàng"; }
 
 <div class="container-fluid box box-primary">
     <div class="box-header">
     </div>
     <div class="box-body">
         <form id="formSearch" action="~/Product/Search">
-
-            @Html.HiddenFor(m => m.SupplierID)
             <div class="row">
                 <div class="col-sm-3">
-                    @Html.DropDownListFor(m => m.SupplierID, SellectistHelper.Suppliers(), new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.SupplierID, SelectListHelper.Suppliers(), new { @class = "form-control" })
                 </div>
                 <div class="col-sm-3">
-                    @Html.DropDownListFor(m => m.CategoryID, SellectistHelper.Categories(), new { @class = "form-control" })
-
+                    @Html.DropDownListFor(m => m.CategoryID, SelectListHelper.Categories(), new { @class = "form-control" })
                 </div>
                 <div class="col-sm-6 input-group">
                     <input type="hidden" name="PageSize" value="@Model.PageSize" />
@@ -74,6 +69,3 @@
         }
     </script>
 }
-
-
-

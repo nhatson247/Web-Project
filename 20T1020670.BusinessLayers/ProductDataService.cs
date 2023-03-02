@@ -157,7 +157,7 @@ namespace _20T1020670.BusinessLayers
         /// </summary>
         /// <param name="attributeID"></param>
         /// <returns></returns>
-        public static ProductAttribute GetAttribute(int attributeID)
+        public static ProductAttribute GetAttribute(long attributeID)
         {
             return productDB.GetAttribute(attributeID);
         }

@@ -6,29 +6,34 @@ using System.Web.Mvc;
 using _20T1020670.BusinessLayers;
 using _20T1020670.DomainModels;
 
-
 namespace _20T1020670.Web
 {
     /// <summary>
-    /// Cung caapshamf tiện ích liên quan đến SelectList
+    /// Cung cấp hàm tiện ích liên quan đến SelectList
     /// </summary>
-    public static class SellectistHelper
+    public static class SelectListHelper
     {
+        /// <summary>
+        /// Danh sách quốc gia
+        /// </summary>
+        /// <returns></returns>
         public static List<SelectListItem> Countries()
         {
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem()
             {
                 Value = "",
-                Text = "--Chọn quốc gia --"
+                Text = "-- Chọn quốc gia --",
             });
-            foreach(var item in CommonDataService.ListOfCountries())
+            foreach (var item in CommonDataService.ListOfCountries())
             {
-                list.Add(new SelectListItem(){
+                list.Add(new SelectListItem()
+                {
                     Value = item.CountryName,
                     Text = item.CountryName
                 });
             }
+
             return list;
         }
 
@@ -38,16 +43,17 @@ namespace _20T1020670.Web
             list.Add(new SelectListItem()
             {
                 Value = "",
-                Text = "--Chọn nhà cung cấp --"
+                Text = "-- Nhà cung cấp --",
             });
             foreach (var item in CommonDataService.ListOfSuppliers(""))
             {
                 list.Add(new SelectListItem()
                 {
-                    Value = item.SupplierName,
+                    Value = item.SupplierID.ToString(),
                     Text = item.SupplierName
                 });
             }
+
             return list;
         }
 
@@ -57,16 +63,17 @@ namespace _20T1020670.Web
             list.Add(new SelectListItem()
             {
                 Value = "",
-                Text = "--Chọn Loại Hàng --"
+                Text = "-- Loại hàng --",
             });
             foreach (var item in CommonDataService.ListOfCategories(""))
             {
                 list.Add(new SelectListItem()
                 {
-                    Value = item.CategoryName,
+                    Value = item.CategoryID.ToString(),
                     Text = item.CategoryName
                 });
             }
+
             return list;
         }
     }

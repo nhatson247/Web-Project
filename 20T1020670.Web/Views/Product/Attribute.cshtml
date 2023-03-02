@@ -1,5 +1,4 @@
 ﻿@model _20T1020670.DomainModels.ProductAttribute
-
 @{
 
 }
@@ -16,7 +15,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Tên thuộc tính:</label>
                 <div class="col-sm-10">
-                    @Html.TextBoxFor(m => m.AttributeName, new { @class = "form-control", @placeholder = "", @autofocus = "autofocus" })
+                    @Html.TextBoxFor(m => m.AttributeName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.AttributeName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -24,7 +23,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Giá trị thuộc tính:</label>
                 <div class="col-sm-10">
-                    @Html.TextBoxFor(m => m.AttributeValue, new { @class = "form-control", @placeholder = "", @autofocus = "autofocus" })
+                    @Html.TextBoxFor(m => m.AttributeValue, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.AttributeValue, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -32,9 +31,8 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Thứ tự hiển thị:</label>
                 <div class="col-sm-10">
-                    @Html.TextBoxFor(m => m.DisplayOrder, new { @class = "form-control", @placeholder = "", @autofocus = "autofocus" })
+                    @Html.TextBoxFor(m => m.DisplayOrder, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.DisplayOrder, "", new { @class = "text-danger" })
-
                 </div>
             </div>
 
@@ -43,7 +41,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-save"></i> Lưu dữ liệu
                     </button>
-                    <a class="btn btn-warning" href="~/product/edit/123">
+                    <a class="btn btn-warning" href="~/product/edit/@Model.ProductID">
                         <i class="fa fa-ban"></i> Quay lại
                     </a>
                 </div>
@@ -54,5 +52,4 @@
     </div>
 
 </div>
-
 
