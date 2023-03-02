@@ -1,0 +1,61 @@
+﻿@model _20T1020670.Web.Models.ShipperSearchOutput
+
+@{
+    Layout = null;
+}
+<p style="margin-top:8px">Có <strong>@string.Format("{0:N0}", Model.RowCount)</strong> nhà cung cấp trong tổng số <strong>@string.Format("{0:N0}", @Model.PageCount) </strong>trang</p>
+
+
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="bg-primary">
+            <th>Tên người giao hàng</th>
+            <th>SĐT</th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Data)
+        {
+            <tr>
+                <td>@item.ShipperName</td>
+                <td>@item.Phone</td>
+                <td class="text-right">
+                    <a href="~/Shipper/Edit/@item.ShipperID" class="btn btn-success">
+                        <i class="glyphicon glyphicon-edit" title="Sửa"></i>
+                    </a>
+                    <a href="~/Shipper/Delete/@item.ShipperID" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-trash" title="Xóa"></i>
+                    </a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+
+</table>
+<div class="text-center">
+    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (i == Model.Page)
+                {
+                    <li class="paginate_button active">
+                        <a href="#">@i</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="paginate_button">
+                        <a href="javascript:;" onclick="doSearch(@i)">@i</a>
+                    </li>
+                }
+
+            }
+        </ul>
+    </div>
+</div>

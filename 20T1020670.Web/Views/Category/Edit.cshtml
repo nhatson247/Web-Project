@@ -1,0 +1,48 @@
+﻿@model _20T1020670.DomainModels.Category
+
+@{
+
+}
+
+<div class="box box-primary">
+    <div class="box-body">
+        <form class="form-horizontal" action="~/Category/Save" method="post">
+
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.CategoryID)
+
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Tên Loại Hàng</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.CategoryName, new { @class = "form-control", @placeholder = "", @autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.CategoryName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Mô Tả</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Nguồn gốc</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.ParentCategoryId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ParentCategoryId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Lưu dữ liệu</button>
+                    <a href="~/Category" class="btn btn-warning">
+                        Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

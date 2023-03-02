@@ -1,0 +1,93 @@
+﻿@model _20T1020670.DomainModels.Employee
+
+@{
+    ViewBag.Title = "Thay đổi thông tin tài khoản";
+}
+
+
+<div class="box box-primary">
+    <div class="box-body">
+        <form class="form-horizontal" action="~/Employee/Save" method="post" enctype="multipart/form-data">
+
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.EmployeeID)
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Họ Tên</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "", @autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Tên</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Ngày Sinh</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           name="birthday"
+                           value="@string.Format("{0:dd/MM/yyyy}",Model.BirthDate)" />
+                    @*@Html.TextBoxFor(m => m.BirthDate, "{0:dd-MM-yyyy}", new { @class = "form-control"})*@
+                    @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(m => m.BirthDate)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Ảnh</label>
+                <div class="col-sm-10">
+                    <img id="photo" src="~/Photo/@Model.Photo"
+                         class="profile-user-img "
+                         alt="Employee Image">
+                    @Html.HiddenFor(m => m.Photo)
+                    <input type="file"
+                           style="margin-top: 8px"
+                           name="uploadPhoto"
+                           onchange="document.getElementById('photo').src = window.URL.createObjectURL(this.files[0])" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Email</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Mật Khẩu</label>
+                    <div class="col-sm-10">
+                        <input type="password"
+                               class="form-control"
+                               id="Password"
+                               name="Password"
+                               value="@Model.Password"
+                               placeholder="">
+                    </div>
+                </div>*@
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Ghi Chú</label>
+                <div class="col-sm-10">
+
+                    <input type="text" class="form-control" id="Notes" name="Notes" value="@Model.Notes" placeholder="">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Lưu dữ liệu</button>
+                    <a href="~/Profile" class="btn btn-warning">
+                        Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

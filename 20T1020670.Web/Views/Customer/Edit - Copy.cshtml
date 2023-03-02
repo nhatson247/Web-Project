@@ -1,0 +1,122 @@
+﻿@model _20T1020670.DomainModels.Customer
+@{
+   
+}
+
+<div class="box box-primary">
+    <div class="box-body">
+        <form class="form-horizontal" action="~/Customer/Save" method="post">
+            <input type="hidden" name="CustomerID" value="@Model.CustomerID" />
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Tên khách hàng</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           id="CustomerName"
+                           name="CustomerName"
+                           value="@Model.CustomerName"
+                           placeholder="" autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Tên liên hệ</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           id="ContactName"
+                           name="ContactName"
+                           value="@Model.ContactName"
+                           placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Quốc gia</label>
+                <div class="col-sm-10">
+                    <select class="form-control"
+                            id="Country"
+                            name="Country">
+                        <option value="">--Chọn Quốc gia--</option>
+                        @foreach (var item in _20T1020670.BusinessLayers.CommonDataService.ListOfCountries())
+                        {
+                            if (item.CountryName == Model.Country)
+                            {
+                                <option value="@item.CountryName" selected>@item.CountryName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CountryName">@item.CountryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Thành phố</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           id="City"
+                           name="City"
+                           value="@Model.City"
+                           placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Địa chỉ</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           id="Address"
+                           name="Address"
+                           value="@Model.Address"
+                           placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Mã bưu chính</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           id="PostalCode"
+                           name="PostalCode"
+                           value="@Model.PostalCode"
+                           placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Email</label>
+                <div class="col-sm-10">
+                    <input type="email"
+                           class="form-control"
+                           id="Email"
+                           name="Email"
+                           value="@Model.Email"
+                           placeholder="">
+                </div>
+            </div>
+            @*<div class="form-group">
+                <label class="control-label col-sm-2" for="email">Mật khẩu</label>
+                <div class="col-sm-10">
+                    <input type="password"
+                           class="form-control"
+                           id="Password"
+                           name="Password"
+                           value="@Model.Password"
+                           placeholder="">
+                </div>
+            </div>*@
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Lưu dữ liệu</button>
+                    <a href="~/Customer" class="btn btn-warning">
+                        Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

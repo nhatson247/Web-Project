@@ -1,0 +1,58 @@
+﻿@model _20T1020670.DomainModels.Category
+
+@{
+
+}
+
+<div class="box box-primary">
+    <div class="box-body">
+        <form class="form-horizontal" action="~/Category/Save" method="post">
+
+            <input type="hidden" name="CategoryID" value="@Model.CategoryID" />
+
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Tên Loại Hàng</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           id="CategoryName"
+                           name="CategoryName"
+                           value="@Model.CategoryName"
+                           placeholder="" autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Mô Tả</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           id="Description"
+                           name="Description"
+                           value="@Model.Description"
+                           placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Nguồn gốc</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           id="ParentCategoryId"
+                           name="ParentCategoryId"
+                           value="@Model.ParentCategoryId"
+                           placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Lưu dữ liệu</button>
+                    <a href="~/Category" class="btn btn-warning">
+                        Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

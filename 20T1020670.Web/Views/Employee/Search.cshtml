@@ -1,0 +1,72 @@
+﻿@model _20T1020670.Web.Models.EmployeeSearchOutput
+
+@{
+    Layout = null;
+}
+
+<p style="margin-top:8px">Có <strong>@string.Format("{0:N0}", Model.RowCount)</strong> nhà cung cấp trong tổng số <strong>@string.Format("{0:N0}", @Model.PageCount) </strong>trang</p>
+
+<!--begin: Employee-->
+<div class="row">
+    @foreach (var item in Model.Data)
+    {
+        <div class="col-sm-4">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <span class="input-group-btn">
+                        <a href="~/Employee/Delete/@item.EmployeeID" class="btn btn-danger pull-right">
+                            <i class="glyphicon glyphicon-trash" title="Xóa"></i>
+                        </a>
+                        <a href="~/Employee/Edit/@item.EmployeeID" class="btn btn-success pull-right ">
+                            <i class="glyphicon glyphicon-edit " title="Sửa"></i>
+                        </a>
+                    </span>
+                    <img src="~/Photo/@item.Photo"
+                         class="profile-user-img img-responsive img-circle"
+                         alt="Employee Image">
+                    <h3 class="profile-employeename text-center">
+                        @item.LastName @item.FirstName
+                    </h3>
+                    <p class="text-BirthDate text-center">@item.BirthDate.ToShortDateString()</p>
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Email:</b> <span class="pull-right"> @item.Email</span>
+                        </li>
+
+                    </ul>
+                    <div class="box-body">
+                        <strong><i class="fa fa-file-text-o margin-r-5"></i>Ghi chú</strong>
+                        <textarea class="form-control" rows="3" placeholder=""> @item.Notes</textarea>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div class="text-center">
+    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+        <ul class="pagination ">
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (i == Model.Page)
+                {
+                    <li class="paginate_button active">
+                        <a href="#">@i</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="paginate_button">
+                        <a href="javascript:;" onclick="doSearch(@i)">@i</a>
+                    </li>
+                }
+
+            }
+        </ul>
+    </div>
+</div>
+
+
