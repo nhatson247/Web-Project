@@ -72,7 +72,6 @@ namespace _20T1020670.Web.Controllers
             return RedirectToAction("Login");
         }
 
-       
         [HttpPost]
         public ActionResult ChangePassword(string userName = "", string oldPassword = "", string newPassword = "")
             {
