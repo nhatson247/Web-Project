@@ -10,7 +10,7 @@
     <div class="box-body">
         <form class="form-horizontal" action="~/Product/SaveAttribute" method="post">
             @Html.AntiForgeryToken()
-
+            @Html.HiddenFor(m => m.ProductID)
             @Html.HiddenFor(m => m.AttributeID)
             <div class="form-group">
                 <label class="control-label col-sm-2">Tên thuộc tính:</label>
@@ -41,6 +41,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-save"></i> Lưu dữ liệu
                     </button>
+         
                     <a class="btn btn-warning" href="~/product/edit/@Model.ProductID">
                         <i class="fa fa-ban"></i> Quay lại
                     </a>

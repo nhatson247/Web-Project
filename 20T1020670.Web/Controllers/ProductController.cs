@@ -100,12 +100,18 @@ namespace _20T1020670.Web.Controllers
                 return RedirectToAction("Index");
             return View(data);
         }
+        /// <summary>
+        /// Lưu mặt hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="price"></param>
+        /// <param name="uploadPhoto"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(Product data, string price, HttpPostedFileBase uploadPhoto)
         {
-            //try
-            //{
+            
             decimal? d = Converter.StringToDecimal(price);
             if (d == null)
                 ModelState.AddModelError("Price", "Giá không hợp lệ");
@@ -114,7 +120,7 @@ namespace _20T1020670.Web.Controllers
 
             if (string.IsNullOrWhiteSpace(data.ProductName))
                 ModelState.AddModelError("ProductName", "Tên mặt hàng không được để trống");
-            if (data.SupplierID == 0)
+            if (data.SupplierID == 0 )
                 ModelState.AddModelError("SupplierID", "Vui lòng chọn nhà cung cấp");
             if (data.CategoryID == 0)
                 ModelState.AddModelError("CategoryID", "Vui lòng chọn loại hàng");
@@ -150,11 +156,6 @@ namespace _20T1020670.Web.Controllers
                 ProductDataService.UpdateProduct(data);
             return RedirectToAction("Index");
 
-            //catch (Exception ex)
-            //{
-            //    //Ghi lại log lỗi
-            //    return Content("Có lỗi xảy ra. Vui lòng thử lại sau!");
-            //}
         }
         /// <summary>
         /// Xóa mặt hàng
@@ -218,17 +219,21 @@ namespace _20T1020670.Web.Controllers
                     return View(data);
                 case "delete":
                     ProductDataService.DeletePhoto(photoID);
-                    return RedirectToAction($"Edit/{productID}"); //return RedirectToAction("Edit", new { productID = productID });
+                    return RedirectToAction($"Edit/{productID}"); 
                 default:
                     return RedirectToAction($"Edit/{productID}");
             }
         }
-
+        /// <summary>
+        /// Lưu thư viện ảnh
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="uploadPhoto"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SavePhoto(ProductPhoto data, HttpPostedFileBase uploadPhoto)
         {
-            //try
-            //{
+
             if (string.IsNullOrWhiteSpace(data.Photo))
                 data.Photo = "";
             if (uploadPhoto != null)
@@ -257,13 +262,10 @@ namespace _20T1020670.Web.Controllers
                 ProductDataService.UpdatePhoto(data);
             }
             return RedirectToAction($"Edit/{data.ProductID}");
-            //}
-            //catch (Exception ex)
-            //{
-            //    //Ghi lại log lỗi
-            //    return Content("Có lỗi xảy ra. Vui lòng thử lại sau!");
-            //}
+     
         }
+
+
         /// <summary>
         /// Các chức năng quản lý thuộc tính của mặt hàng
         /// </summary>
@@ -279,8 +281,7 @@ namespace _20T1020670.Web.Controllers
                 case "add":
                     var data = new ProductAttribute()
                     {
-                        AttributeID = 0
-                        ,
+                        AttributeID = 0,
                         ProductID = productID
                     };
                     ViewBag.Title = "Bổ sung thuộc tính";
@@ -296,14 +297,19 @@ namespace _20T1020670.Web.Controllers
                     return View(data);
                 case "delete":
                     ProductDataService.DeleteAttribute(attributeID);
-                    return RedirectToAction($"Edit/{productID}"); //return RedirectToAction("Edit", new { productID = productID });
+                    return RedirectToAction($"Edit/{productID}"); 
 
                 default:
                     return RedirectToAction($"Edit/{productID}");
             }
         }
-        [HttpPost]
 
+        /// <summary>
+        /// Lưu thuộc tính
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
         public ActionResult SaveAttribute(ProductAttribute data)
         {
             
