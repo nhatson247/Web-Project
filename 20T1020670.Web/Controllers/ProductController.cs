@@ -117,7 +117,7 @@ namespace _20T1020670.Web.Controllers
                 ModelState.AddModelError("Price", "Giá không hợp lệ");
             else
                 data.Price = d.Value;
-
+        
             if (string.IsNullOrWhiteSpace(data.ProductName))
                 ModelState.AddModelError("ProductName", "Tên mặt hàng không được để trống");
             if (data.SupplierID == 0 )
@@ -157,6 +157,9 @@ namespace _20T1020670.Web.Controllers
             return RedirectToAction("Index");
 
         }
+
+
+      
         /// <summary>
         /// Xóa mặt hàng
         /// </summary>
