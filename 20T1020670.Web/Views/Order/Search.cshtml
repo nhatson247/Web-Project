@@ -1,8 +1,11 @@
-﻿@model _20T1020670.Web.Models.ProductSearchOutput
+﻿@model _20T1020670.Web.Models.OrderSearchOutput
+
 @{
     Layout = null;
 }
-<p style="margin:10px 0 5px 0">
+
+<!-- Kết quả tìm kiếm -->
+<p style="margin:10px 0 10px 0">
     Có <strong>@string.Format("{0:N0}", Model.RowCount)</strong> mặt hàng trong tổng số <strong>@string.Format("{0:N0}", Model.PageCount)</strong> trang
 </p>
 
@@ -10,29 +13,33 @@
     <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr class="bg-primary">
-                <th style="width:80px">Ảnh</th>
-                <th>Tên mặt hàng</th>
-                <th>Đơn vị tính</th>
-                <th>Giá</th>
-                <th style="width:75px">&nbsp;</th>
+                <th>Khách hàng</th>
+                <th>Ngày lập</th>
+
+                <th>Nhân viên phụ trách</th>
+                <th>Thời điểm duyệt</th>
+                <th>Người giao hàng</th>
+                <th>ngày nhận giao hàng</th>
+                <th>Thời điểm kết thúc</th>
+                <th>Trạng thái</th>
+                <th style="width:40px"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Data)
             {
                 <tr>
+                    <td>@item.CustomerName</td>
+                    <td>@item.OrderTime</td>
+                    <td>@item.EmployeeFullName</td>
+                    <td>@item.AcceptTime</td>
+                    <td>@item.ShipperName</td>
+                    <td>@item.ShippedTime</td>
+                    <td>@item.FinishedTime</td>
+                    <td>@item.StatusDescription</td>
                     <td>
-                        <img src="~/Photo/@item.Photo" style="width:80px" />
-                    </td>
-                    <td style="vertical-align:middle">@item.ProductName</td>
-                    <td style="vertical-align:middle">@item.Unit</td>
-                    <td style="vertical-align:middle">@item.Price.ToString("0.00")</td>
-                    <td class="text-right" style="vertical-align:middle">
-                        <a href="~/Product/Edit/@item.ProductID" class="btn btn-xs btn-flat btn-info">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="~/product/delete/@item.ProductID" class="btn btn-xs btn-flat btn-danger">
-                            <i class="fa fa-remove"></i>
+                        <a href="~/Order/Details/@item.OrderID" class="btn btn-info btn-xs">
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </a>
                     </td>
                 </tr>

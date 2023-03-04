@@ -34,7 +34,7 @@ namespace _20T1020670.DataLayers
         /// </summary>
         /// <param name="productID"></param>
         /// <returns></returns>
-        Product GetProduct(int productID);
+        Product Get(int productID);
         /// <summary>
         /// Bổ sung mặt hàng mới (hàm trả về mã của mặt hàng được bổ sung)
         /// </summary>

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _20T1020670.DataLayers.SQLServer;
 using _20T1020670.DomainModels;
 
 namespace _20T1020670.DataLayers.SQLServer
@@ -93,27 +94,24 @@ namespace _20T1020670.DataLayers.SQLServer
         public int Count(string searchValue = "", int categoryID = 0, int supplierID = 0)
         {
             int count = 0;
-
             if (searchValue != "")
                 searchValue = "%" + searchValue + "%";
-
-            using (SqlConnection cn = OpenConnection())
+            using (var connection = OpenConnection())
             {
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = @"SELECT	COUNT(*)
-                                    FROM	Products 
-                                    WHERE	((@SearchValue = N'') OR (ProductName LIKE @SearchValue))                              
-		                                    AND ((@CategoryID = 0) OR (CategoryID = @CategoryID))
-		                                    AND ((@SupplierID = 0) OR (SupplierID = @SupplierID))";
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = cn;
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = @"SELECT  COUNT(*)
+                                    FROM    Products 
+                                    WHERE   (@SearchValue = N'' OR ProductName LIKE @SearchValue)
+                                        AND (@CategoryID = 0 OR CategoryID = @CategoryID)
+                                        AND (@SupplierID = 0 OR SupplierID = @SupplierID)";
+                cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@SearchValue", searchValue);
                 cmd.Parameters.AddWithValue("@CategoryID", categoryID);
                 cmd.Parameters.AddWithValue("@SupplierID", supplierID);
 
                 count = Convert.ToInt32(cmd.ExecuteScalar());
 
-                cn.Close();
+                connection.Close();
             }
             return count;
         }
@@ -221,7 +219,7 @@ namespace _20T1020670.DataLayers.SQLServer
             return result;
         }
 
-        public Product GetProduct(int productID)
+        public Product Get(int productID)
         {
             Product data = null;
             using (SqlConnection cn = OpenConnection())
@@ -330,52 +328,47 @@ namespace _20T1020670.DataLayers.SQLServer
         public IList<Product> List(int page = 1, int pageSize = 0, string searchValue = "", int categoryID = 0, int supplierID = 0)
         {
             List<Product> data = new List<Product>();
-
             if (searchValue != "")
                 searchValue = "%" + searchValue + "%";
-
-            using (SqlConnection cn = OpenConnection())
+            using (var connection = OpenConnection())
             {
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = @"SELECT *
-                                    FROM 
-                                    (
-	                                    SELECT	*, ROW_NUMBER() OVER (ORDER BY ProductName) AS RowNumber
-	                                    FROM	Products as p 
-	                                    WHERE	
-                                                (@SearchValue = N'') OR ( (p.ProductName LIKE @SearchValue)
-                                                AND((@CategoryID = 0) OR (p.CategoryID = @CategoryID))
-                                                AND((@SupplierID = 0) OR (p.SupplierID = @SupplierID))
-		                            )) 
-                                    AS t
-                                    WHERE (@PageSize = 0) OR (t.RowNumber BETWEEN (@Page - 1) * @PageSize + 1 AND @Page * @PageSize)";
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = cn;
-
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = @"SELECT  *
+                                    FROM    (
+                                                SELECT  *, ROW_NUMBER() OVER(ORDER BY ProductName) AS RowNumber
+                                                FROM    Products 
+                                                WHERE   (@SearchValue = N'' OR ProductName LIKE @SearchValue)
+                                                    AND (@CategoryID = 0 OR CategoryID = @CategoryID)
+                                                    AND (@SupplierID = 0 OR SupplierID = @SupplierID)
+                                            ) AS t
+                                    WHERE  (@PageSize = 0) OR (t.RowNumber BETWEEN (@Page-1)*@PageSize+1 AND @Page*@PageSize)
+                                    ORDER BY t.RowNumber";
+                cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Page", page);
                 cmd.Parameters.AddWithValue("@PageSize", pageSize);
                 cmd.Parameters.AddWithValue("@SearchValue", searchValue);
                 cmd.Parameters.AddWithValue("@CategoryID", categoryID);
                 cmd.Parameters.AddWithValue("@SupplierID", supplierID);
 
-                var dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                while (dbReader.Read())
+                using (var dbReader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection))
                 {
-                    data.Add(new Product()
+                    while (dbReader.Read())
                     {
-                        ProductID = Convert.ToInt32(dbReader["ProductID"]),
-                        ProductName = Convert.ToString(dbReader["ProductName"]),
-                        SupplierID = Convert.ToInt32(dbReader["SupplierID"]),
-                        CategoryID = Convert.ToInt32(dbReader["CategoryID"]),
-                        Unit = Convert.ToString(dbReader["Unit"]),
-                        Price = Convert.ToDecimal(dbReader["Price"]),
-                        Photo = Convert.ToString(dbReader["Photo"])
-                    });
+                        data.Add(new Product()
+                        {
+                            ProductID = Convert.ToInt32(dbReader["ProductID"]),
+                            ProductName = Convert.ToString(dbReader["ProductName"]),
+                            Unit = Convert.ToString(dbReader["Unit"]),
+                            Price = Convert.ToDecimal(dbReader["Price"]),
+                            Photo = Convert.ToString(dbReader["Photo"]),
+                            CategoryID = Convert.ToInt32(dbReader["CategoryID"]),
+                            SupplierID = Convert.ToInt32(dbReader["SupplierID"])
+                        });
+                    }
+                    dbReader.Close();
                 }
-                dbReader.Close();
-                cn.Close();
+                connection.Close();
             }
-
             return data;
         }
 

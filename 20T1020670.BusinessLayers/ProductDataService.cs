@@ -60,7 +60,7 @@ namespace _20T1020670.BusinessLayers
         /// 
         public static Product GetProduct(int productID)
         {
-            return productDB.GetProduct(productID);
+            return productDB.Get(productID);
         }
         public static int AddProduct(Product data)
         {

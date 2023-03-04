@@ -128,7 +128,25 @@ namespace _20T1020670.Web.Controllers
                 ModelState.AddModelError("Unit", "Đơn vị tính không được để trống");
             if (data.Price == 0)
                 ModelState.AddModelError("Price", "Vui lòng nhập giá");
-
+            var model = new ProductModel()
+            {
+                ProductID = data.ProductID,
+                ProductName = data.ProductName,
+                CategoryID = data.CategoryID,
+                SupplierID = data.SupplierID,
+                Unit = data.Unit,
+                Price = data.Price,
+                Photo = data.Photo,
+                Attributes = ProductDataService.ListAttributes(data.ProductID),
+                Photos = ProductDataService.ListPhotos(data.ProductID)
+            };
+            if (!ModelState.IsValid)
+            {
+                if (data.ProductID == 0)
+                    return View("Create", data);
+                else
+                    return View("Edit", model);
+            }
             if (string.IsNullOrWhiteSpace(data.Photo))
             {
                 data.Photo = "";
