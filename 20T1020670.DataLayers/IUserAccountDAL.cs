@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace _20T1020670.DataLayers
 { 
     /// <summary>
-    /// định nghĩa các phép xử lý liên quan ddeeens dữ liệu tài khoản của người dùng
+    /// định nghĩa các phép xử lý liên quan đến dữ liệu tài khoản của người dùng
     /// </summary>
     public interface IUserAccountDAL
     {

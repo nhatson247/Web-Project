@@ -15,10 +15,18 @@ namespace _20T1020670.DataLayers.SQLServer
     /// </summary>
     public class ProductDAL : _BaseDAL, IProductDAL
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionString"></param>
         public ProductDAL(string connectionString) : base(connectionString)
         {
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public int Add(Product data)
         {
             int result = 0;
@@ -43,6 +51,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
 
         public long AddAttribute(ProductAttribute data)
         {
@@ -66,6 +79,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
 
         public long AddPhoto(ProductPhoto data)
         {
@@ -90,6 +108,13 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <param name="categoryID"></param>
+        /// <param name="supplierID"></param>
+        /// <returns></returns>
 
         public int Count(string searchValue = "", int categoryID = 0, int supplierID = 0)
         {
@@ -115,6 +140,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return count;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
 
         public bool Delete(int productID)
         {
@@ -142,7 +172,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="attributeID"></param>
+        /// <returns></returns>
         public bool DeleteAttribute(long attributeID)
         {
             bool result = false;
@@ -161,6 +195,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
 
         public bool DeleteAttribute(int productID)
         {
@@ -180,6 +219,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
 
         public bool DeletePhoto(int productID)
         {
@@ -199,6 +243,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="photoID"></param>
+        /// <returns></returns>
 
         public bool DeletePhoto(long photoID)
         {
@@ -218,7 +267,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         public Product Get(int productID)
         {
             Product data = null;
@@ -247,7 +300,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return data;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="attributeID"></param>
+        /// <returns></returns>
         public ProductAttribute GetAttribute(long attributeID)
         {
             ProductAttribute data = null;
@@ -274,7 +331,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return data;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="photoID"></param>
+        /// <returns></returns>
         public ProductPhoto GetPhoto(long photoID)
         {
 
@@ -303,7 +364,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return data;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         public bool InUsed(int productID)
         {
             bool result = false;
@@ -324,7 +389,15 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <param name="categoryID"></param>
+        /// <param name="supplierID"></param>
+        /// <returns></returns>
         public IList<Product> List(int page = 1, int pageSize = 0, string searchValue = "", int categoryID = 0, int supplierID = 0)
         {
             List<Product> data = new List<Product>();
@@ -371,7 +444,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return data;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         public IList<ProductAttribute> ListAttributes(int productID)
         {
             List<ProductAttribute> data = new List<ProductAttribute>();
@@ -406,7 +483,11 @@ namespace _20T1020670.DataLayers.SQLServer
 
             return data;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         public IList<ProductPhoto> ListPhotos(int productID)
         {
             List<ProductPhoto> data = new List<ProductPhoto>();
@@ -442,6 +523,11 @@ namespace _20T1020670.DataLayers.SQLServer
 
             return data;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
 
         public bool Update(Product data)
         {
@@ -468,7 +554,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool UpdateAttribute(ProductAttribute data)
         {
             bool result = false;
@@ -491,7 +581,11 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool UpdatePhoto(ProductPhoto data)
         {
             bool result = false;

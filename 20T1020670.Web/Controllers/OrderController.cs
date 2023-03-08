@@ -72,10 +72,13 @@ namespace _20T1020670.Web.Controllers
         /// <returns></returns>
         public ActionResult Details(int id = 0)
         {
+  
             //TODO: Code chức năng lấy và hiển thị thông tin của đơn hàng và chi tiết của đơn hàng
             if (id <= 0)
                 return RedirectToAction("Index");
             var order = OrderService.GetOrder(id);
+            if (order == null)
+                return RedirectToAction("Index");
             var data = new OrderModel()
             {
                 OrderID = order.OrderID,
@@ -96,8 +99,7 @@ namespace _20T1020670.Web.Controllers
                 Status = order.Status,
                 OrderDetails = OrderService.ListOrderDetails(id)
             };
-            if (data == null)
-                return RedirectToAction("Index");
+            ViewBag.ErrorMessage = TempData[ERROR_MESSAGE] ?? "";
             return View(data);
         }
         /// <summary>
@@ -109,6 +111,11 @@ namespace _20T1020670.Web.Controllers
         [Route("EditDetail/{orderID}/{productID}")]
         public ActionResult EditDetail(int orderID = 0, int productID = 0)
         {
+            if (OrderService.GetOrder(orderID).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
+            {
+                TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
+                return RedirectToAction("Details");
+            }
             //TODO: Code chức năng để lấy chi tiết đơn hàng cần edit
             if (orderID <= 0 || productID <= 0)
                 return RedirectToAction("Details");
@@ -125,8 +132,7 @@ namespace _20T1020670.Web.Controllers
         [HttpPost]
         public ActionResult UpdateDetail(OrderDetail data)
         {
-           
-            if(data.Quantity < 1 || data.Quantity == 0)
+            if (data.Quantity < 1 || data.Quantity == 0)
             {
                 data.Quantity = 1;
             }
@@ -143,6 +149,11 @@ namespace _20T1020670.Web.Controllers
         [Route("DeleteDetail/{orderID}/{productID}")]
         public ActionResult DeleteDetail(int orderID = 0, int productID = 0)
         {
+            if (OrderService.GetOrder(orderID).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
+            {
+                TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
+                return RedirectToAction("Details");
+            }
             //TODO: Code chức năng xóa 1 chi tiết trong đơn hàng
             OrderService.DeleteOrderDetail(orderID, productID);
             return RedirectToAction($"Details/{orderID}");
@@ -154,6 +165,11 @@ namespace _20T1020670.Web.Controllers
         /// <returns></returns>
         public ActionResult Delete(int id = 0)
         {
+            if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
+            {
+                TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
+                return RedirectToAction("Details");
+            }
             //TODO: Code chức năng để xóa đơn hàng (nếu được phép xóa)
             OrderService.DeleteOrder(id);
             return RedirectToAction("Index");
@@ -165,7 +181,11 @@ namespace _20T1020670.Web.Controllers
         /// <returns></returns>
         public ActionResult Accept(int id = 0)
         {
-        
+            if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
+            {
+                TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
+                return RedirectToAction("Details");
+            }
             //TODO: Code chức năng chấp nhận đơn hàng (nếu được phép)
             OrderService.AcceptOrder(id);
             return RedirectToAction($"Details/{id}");
@@ -177,6 +197,11 @@ namespace _20T1020670.Web.Controllers
         /// <returns></returns>
         public ActionResult Shipping(int id = 0, int shipperID = 0)
         {
+            if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
+            {
+                TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
+                return RedirectToAction("Details");
+            }
             //TODO: Code chức năng chuyển đơn hàng sang trạng thái đang giao hàng (nếu được phép)
             ViewBag.OrderID = id;
             if (Request.HttpMethod == "GET")
@@ -191,8 +216,13 @@ namespace _20T1020670.Web.Controllers
         /// <returns></returns>
         public ActionResult Finish(int id = 0)
         {
+            if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
+            {
+                TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
+                return RedirectToAction("Details");
+            }
             //TODO: Code chức năng ghi nhận hoàn tất đơn hàng (nếu được phép)
-                OrderService.FinishOrder(id);
+            OrderService.FinishOrder(id);
                 return RedirectToAction($"Details/{id}");
             
         }
@@ -203,6 +233,11 @@ namespace _20T1020670.Web.Controllers
         /// <returns></returns>
         public ActionResult Cancel(int id = 0)
         {
+            if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
+            {
+                TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
+                return RedirectToAction("Details");
+            }
             //TODO: Code chức năng hủy đơn hàng (nếu được phép)
             OrderService.CancelOrder(id);
 
@@ -215,12 +250,15 @@ namespace _20T1020670.Web.Controllers
         /// <returns></returns>
         public ActionResult Reject(int id = 0)
         {
+            if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
+            {
+                TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
+                return RedirectToAction("Details");
+            }
             //TODO: Code chức năng từ chối đơn hàng (nếu được phép)
 
             var order = OrderService.GetOrder(id);
-          
             OrderService.RejectOrder(id);
-
             return RedirectToAction($"Details/{id}");
         }
 

@@ -55,7 +55,13 @@ namespace _20T1020670.DataLayers.SQLServer
             }
             return data;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
         public bool ChangePassword(string userName, string oldPassword, string newPassword)
         {
             bool result = false;

@@ -2,15 +2,23 @@
 
 @{
     ViewBag.Title = "Quản lý đơn hàng";
+    string errorMessage = ViewBag.ErrorMessage.ToString();
 }
 
 <div class="box box-primary">
     <div class="box-header text-right">
+        @if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            <div class="alert alert-warning alert-dismissible text-left">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Lỗi!</strong> @errorMessage
+            </div>
+        }
         <div class="btn-group">
             <!-- //TODO
-    YÊU CẦU: Đối với các chức năng liên quan đến đơn hàng, chỉ được hiển thị menu/nút của những chức năng
-    phù hợp với trạng thái hiện tại của đơn hàng (ví dụ: Nếu đơn hàng chưa được chấp nhận thì không được chuyển để giao hàng)
-    -->
+        YÊU CẦU: Đối với các chức năng liên quan đến đơn hàng, chỉ được hiển thị menu/nút của những chức năng
+        phù hợp với trạng thái hiện tại của đơn hàng (ví dụ: Nếu đơn hàng chưa được chấp nhận thì không được chuyển để giao hàng)
+        -->
             <div class="btn-group">
                 <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
                     Xử lý đơn hàng <span class="caret"></span>
@@ -46,10 +54,10 @@
                 @{
                     if (Model.Status == 3)
                     {
-                         <ul class="dropdown-menu" role="menu">
-                             <li><a href="~/Order/Finish/@Model.OrderID" onclick="return confirm('Xác nhận đơn hàng đã hoàn tất thành công?')">Xác nhận hoàn tất đơn hàng</a></li>
-                             <li><a href="~/Order/Cancel/@Model.OrderID" onclick="return confirm('Xác nhận hủy đơn hàng này?')">Hủy đơn hàng</a></li>
-                         </ul>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="~/Order/Finish/@Model.OrderID" onclick="return confirm('Xác nhận đơn hàng đã hoàn tất thành công?')">Xác nhận hoàn tất đơn hàng</a></li>
+                            <li><a href="~/Order/Cancel/@Model.OrderID" onclick="return confirm('Xác nhận hủy đơn hàng này?')">Hủy đơn hàng</a></li>
+                        </ul>
                     }
                 }
 
@@ -160,9 +168,12 @@
                             <td class="text-right">@item.SalePrice</td>
                             <td class="text-right">@item.TotalPrice</td>
                             <td class="text-right">
+                                @if (Model.Status == 1 || Model.Status == 2 )
+                                {
                                 <a href="~/Order/EditDetail/@item.OrderID/@item.ProductID" class="btn btn-xs btn-primary btn-modal">
                                     <i class="fa fa-edit"></i>
                                 </a>
+                                }
                                 @if (Model.Status == 1)
                                 {
                                     <a href="~/Order/DeleteDetail/@item.OrderID/@item.ProductID" class="btn btn-xs btn-danger" onclick="return confirm('Xóa mặt hàng này khỏi đơn hàng?')">

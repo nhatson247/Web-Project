@@ -7,8 +7,15 @@ using System.Web.Routing;
 
 namespace _20T1020670.Web
 {
+    /// <summary>
+    /// Định nghĩa đường truyền
+    /// </summary>
     public class RouteConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="routes"></param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

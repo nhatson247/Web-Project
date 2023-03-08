@@ -36,7 +36,10 @@ namespace _20T1020670.Web
 
             return list;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<SelectListItem> Suppliers()
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -56,7 +59,10 @@ namespace _20T1020670.Web
 
             return list;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<SelectListItem> Categories()
         {
             List<SelectListItem> list = new List<SelectListItem>();

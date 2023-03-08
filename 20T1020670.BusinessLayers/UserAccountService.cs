@@ -27,6 +27,13 @@ namespace _20T1020670.BusinessLayers
             employeeAccountDB = new DataLayers.SQLServer.EmployeeAccountDAL(connectionString);
             customerAccountDB = new DataLayers.SQLServer.CustomerAccountDAL(connectionString);
         }
+        /// <summary>
+        /// Đăng nhập
+        /// </summary>
+        /// <param name="accountType"></param>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static UserAccount Authorize(AccountTypes accountType, string userName, string password)
         {
             if(accountType == AccountTypes.Employee)
@@ -39,6 +46,14 @@ namespace _20T1020670.BusinessLayers
 
             }
         }
+        /// <summary>
+        /// Đổi mật khẩu 
+        /// </summary>
+        /// <param name="accountType"></param>
+        /// <param name="userName"></param>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
         public static bool ChangePassword(AccountTypes accountType, string userName, string oldPassword, string newPassword)
         {
             if(accountType == AccountTypes.Employee)

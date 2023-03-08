@@ -84,6 +84,8 @@ namespace _20T1020670.Web.Controllers
             if (id == 0)
                 return RedirectToAction("Index");
             var product = ProductDataService.GetProduct(id);
+            if (product == null)
+                return RedirectToAction("Index");
             var data = new ProductModel()
             {
                 ProductID = product.ProductID,
