@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace _20T1020670.DomainModels
 {
     /// <summary>
-    /// 
+    ///  Loại hàng
     /// </summary>
    public class Category
     {

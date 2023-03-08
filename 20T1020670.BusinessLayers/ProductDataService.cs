@@ -14,6 +14,9 @@ namespace _20T1020670.BusinessLayers
     /// </summary>
     public static class ProductDataService
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private static readonly IProductDAL productDB;
 
         /// <summary>

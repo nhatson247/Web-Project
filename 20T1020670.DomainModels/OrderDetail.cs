@@ -12,7 +12,7 @@ namespace _20T1020670.DomainModels
     public class OrderDetail
     {
         /// <summary>
-        /// 
+        /// Mã thông tin chi tiết mặt hàng bán trong đơn hàng
         /// </summary>
         public int OrderDetailID { get; set; }
         /// <summary>

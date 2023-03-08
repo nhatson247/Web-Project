@@ -125,6 +125,11 @@ namespace _20T1020670.Web.Controllers
         [HttpPost]
         public ActionResult UpdateDetail(OrderDetail data)
         {
+           
+            if(data.Quantity < 1 || data.Quantity == 0)
+            {
+                data.Quantity = 1;
+            }
          
             OrderService.SaveOrderDetail(data.OrderID, data.ProductID, data.Quantity, data.SalePrice);
             return RedirectToAction($"Details/{data.OrderID}");

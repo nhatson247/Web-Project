@@ -58,8 +58,6 @@ namespace _20T1020670.DomainModels
         /// Email của khách hàng
         /// </summary>
         public string CustomerEmail { get; set; }
-
-
         /// <summary>
         /// Mã của nhân viên phụ trách đơn hàng
         /// </summary>
@@ -68,7 +66,6 @@ namespace _20T1020670.DomainModels
         /// Họ tên của nhân viên phụ trách đơn hàng
         /// </summary>
         public string EmployeeFullName { get; set; }
-
         /// <summary>
         /// Mã người giao hàng
         /// </summary>
@@ -81,7 +78,6 @@ namespace _20T1020670.DomainModels
         /// Điện thoại của người giao hàng
         /// </summary>
         public string ShipperPhone { get; set; }       
-
         /// <summary>
         /// Mô tả trạng thái đơn hàng dựa trên mã trạng thái
         /// </summary>

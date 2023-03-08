@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace _20T1020670.DomainModels
 {
+    /// <summary>
+    /// Quốc gia
+    /// </summary>
     public class Country
     {
         /// <summary>

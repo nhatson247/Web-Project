@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace _20T1020670.DomainModels
 {
     /// <summary>
-    /// 
+    /// Nhân viên
     /// </summary>
     public class Employee
     {

@@ -44,6 +44,5 @@ namespace _20T1020670.DomainModels
         /// </summary>
         public string Phone { get; set; }
 
-
     }
 }
