@@ -83,7 +83,7 @@ namespace _20T1020670.BusinessLayers
             
             //TODO: Kiểm tra xem việc hủy bỏ đơn hàng có hợp lý đối với trạng thái hiện tại của đơn hàng hay không?
             //... Your code here ...
-            if(data.Status == OrderStatus.INIT || data.Status == OrderStatus.ACCEPTED)
+            if(data.Status != OrderStatus.INIT || data.Status != OrderStatus.ACCEPTED || data.Status != OrderStatus.SHIPPING)
             {
                 data.Status = OrderStatus.CANCEL;
                 data.FinishedTime = DateTime.Now;
@@ -108,14 +108,11 @@ namespace _20T1020670.BusinessLayers
             //TODO: Kiểm tra xem việc từ chối đơn hàng có hợp lý đối với trạng thái hiện tại của đơn hàng hay không?
             //... Your code here ...
 
-             if (data.Status != OrderStatus.INIT && data.Status != OrderStatus.ACCEPTED && data.Status != OrderStatus.SHIPPING)
+             if (data.Status != OrderStatus.INIT )
             {
-                // Nếu trạng thái của đơn hàng không phải là INIT hoặc ACCEPTED thì không thể từ chối đơn hàng được
+                
                 return false;
             }
-
-            // Nếu không có vấn đề gì, cập nhật trạng thái của đơn hàng thành INIT và thời gian hoàn thành là thời điểm hiện tại
-
             data.Status = OrderStatus.REJECTED;
             data.FinishedTime = DateTime.Now;
             return orderDB.Update(data);            

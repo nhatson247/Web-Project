@@ -29,8 +29,8 @@
                     {
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="~/Order/Accept/@Model.OrderID" onclick="return confirm('Xác nhận duyệt chấp nhận đơn hàng này?')">Duyệt đơn hàng</a></li>
-                            <li><a href="~/Order/Cancel/@Model.OrderID" onclick="return confirm('Xác nhận hủy đơn hàng này?')">Hủy đơn hàng</a></li>
                             <li><a href="~/Order/Reject/@Model.OrderID" onclick="return confirm('Xác nhận từ chối đơn hàng này?')">Từ chối đơn hàng</a></li>
+                            <li><a href="~/Order/Cancel/@Model.OrderID" onclick="return confirm('Xác nhận hủy đơn hàng này?')">Hủy đơn hàng</a></li>
                         </ul>
                     }
                 }
@@ -40,19 +40,16 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="~/Order/Shipping/@Model.OrderID" class="btn-modal">Chuyển giao hàng</a></li>
                             <li><a href="~/Order/Cancel/@Model.OrderID" onclick="return confirm('Xác nhận hủy đơn hàng này?')">Hủy đơn hàng</a></li>
-                            <li><a href="~/Order/Reject/@Model.OrderID" onclick="return confirm('Xác nhận từ chối đơn hàng này?')">Từ chối đơn hàng</a></li>
-
                         </ul>
                     }
                 }
                 @{
                     if (Model.Status == 3)
                     {
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="~/Order/Finish/@Model.OrderID" onclick="return confirm('Xác nhận đơn hàng đã hoàn tất thành công?')">Xác nhận hoàn tất đơn hàng</a></li>
-                            <li class="divider"></li>
-                            <li><a href="~/Order/Reject/@Model.OrderID" onclick="return confirm('Xác nhận từ chối đơn hàng này?')">Từ chối đơn hàng</a></li>
-                        </ul>
+                         <ul class="dropdown-menu" role="menu">
+                             <li><a href="~/Order/Finish/@Model.OrderID" onclick="return confirm('Xác nhận đơn hàng đã hoàn tất thành công?')">Xác nhận hoàn tất đơn hàng</a></li>
+                             <li><a href="~/Order/Cancel/@Model.OrderID" onclick="return confirm('Xác nhận hủy đơn hàng này?')">Hủy đơn hàng</a></li>
+                         </ul>
                     }
                 }
 
