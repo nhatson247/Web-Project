@@ -130,6 +130,7 @@ namespace _20T1020670.Web.Controllers
                 ModelState.AddModelError("Unit", "Đơn vị tính không được để trống");
             if (data.Price == 0)
                 ModelState.AddModelError("Price", "Vui lòng nhập giá");
+
             var model = new ProductModel()
             {
                 ProductID = data.ProductID,
@@ -161,6 +162,10 @@ namespace _20T1020670.Web.Controllers
                 string filePath = System.IO.Path.Combine(path, fileName);
                 uploadPhoto.SaveAs(filePath);
                 data.Photo = fileName;
+            }
+            else
+            {
+                ModelState.AddModelError("Photo", "Vui lòng chọn ảnh");
             }
             if (!ModelState.IsValid)
             {
@@ -267,10 +272,15 @@ namespace _20T1020670.Web.Controllers
                 uploadPhoto.SaveAs(filePath);
                 data.Photo = fileName;
             }
+            else
+            {
+                ModelState.AddModelError("Photo", "Vui lòng chọn ảnh");
+            }
             if (string.IsNullOrWhiteSpace(data.Description))
                 ModelState.AddModelError("Description", "Giá trị thuộc tính không được để trống");
             if (data.DisplayOrder == 0)
                 ModelState.AddModelError("DisplayOrder", "không được để trống");
+            
             if (!ModelState.IsValid)
             {
                 ViewBag.Title = data.PhotoID == 0 ? "Bổ sung ảnh" : "Cập nhật ảnh";

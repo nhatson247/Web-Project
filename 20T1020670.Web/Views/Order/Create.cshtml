@@ -4,6 +4,8 @@
     int stt = 0;
     decimal sumTotal = 0;
     string errorMessage = ViewBag.ErrorMessage.ToString();
+    var userAccount = Converter.CookieToUserAccount(User.Identity.Name);
+
 }
 
 <div class="box box-primary">
@@ -33,7 +35,7 @@
             <div id="searchResult">
             </div>
         </div>
-                
+
         <div class="col-md-8">
             <!-- Giỏ hàng -->
             <h4>Danh sách mặt hàng đã chọn</h4>
@@ -89,7 +91,7 @@
             </table>
             <div class="text-right">
                 <a href="~/Order/ClearCart" class="btn btn-sm btn-danger" onclick="confirm('Có muốn xóa giỏ hàng không?')">
-                   <i class="fa fa-trash"></i> Xóa giỏ hàng
+                    <i class="fa fa-trash"></i> Xóa giỏ hàng
                 </a>
             </div>
 
@@ -111,16 +113,21 @@
                         <label>Nhân viên phụ trách:</label>
                         <select class="form-control" name="employeeID">
                             <option value="0">-- Chọn nhân viên --</option>
+                            <option value="@userAccount.UserId" selected> @userAccount.FullName </option>
                             @foreach (var item in _20T1020670.BusinessLayers.CommonDataService.ListOfEmployees(""))
                             {
-                                <option value="@item.EmployeeID">@item.FirstName @item.LastName</option>
+                                if (userAccount.UserId != item.EmployeeID.ToString())
+                                {
+                                    <option value="@item.EmployeeID">@item.FirstName @item.LastName</option>
+
+                                }
                             }
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12 text-right">
-                        <button type="submit" class="btn btn-sm btn-primary">Lập đơn hàng</button>                        
+                        <button type="submit" class="btn btn-sm btn-primary">Lập đơn hàng</button>
                     </div>
                 </div>
             </form>

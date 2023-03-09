@@ -19,7 +19,7 @@ namespace _20T1020670.Web.Controllers
         /// <summary>
         /// 
         /// </summary>
-        private const int PAGE_SIZE = 20;
+        private const int PAGE_SIZE = 10;
         private const string CUSTOMER_SEARCH = "SearchCustomerCondition";
      
         // GET: Customer

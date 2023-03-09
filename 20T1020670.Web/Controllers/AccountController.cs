@@ -88,11 +88,8 @@ namespace _20T1020670.Web.Controllers
                 ModelState.AddModelError("", "Mật khẩu cũ không đúng");
                 return View();
             }
-            Response.Write("<script>alert('Đổi mật khẩu thành công! Vui lòng đăng nhập lại!')</script> ");
-            Session.Clear();
-            FormsAuthentication.SignOut();
-            return View("Login");
+            return RedirectToAction("Login");
         }
 
-        }
     }
+}

@@ -114,7 +114,8 @@ namespace _20T1020670.Web.Controllers
             if (OrderService.GetOrder(orderID).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
             {
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
-                return RedirectToAction("Details");
+                return RedirectToAction($"Details/{orderID}");
+
             }
             //TODO: Code chức năng để lấy chi tiết đơn hàng cần edit
             if (orderID <= 0 || productID <= 0)
@@ -152,7 +153,8 @@ namespace _20T1020670.Web.Controllers
             if (OrderService.GetOrder(orderID).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
             {
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
-                return RedirectToAction("Details");
+                return RedirectToAction($"Details/{orderID}");
+
             }
             //TODO: Code chức năng xóa 1 chi tiết trong đơn hàng
             OrderService.DeleteOrderDetail(orderID, productID);
@@ -168,7 +170,8 @@ namespace _20T1020670.Web.Controllers
             if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
             {
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
-                return RedirectToAction("Details");
+                return RedirectToAction($"Details/{id}");
+
             }
             //TODO: Code chức năng để xóa đơn hàng (nếu được phép xóa)
             OrderService.DeleteOrder(id);
@@ -184,7 +187,8 @@ namespace _20T1020670.Web.Controllers
             if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
             {
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
-                return RedirectToAction("Details");
+                return RedirectToAction($"Details/{id}");
+
             }
             //TODO: Code chức năng chấp nhận đơn hàng (nếu được phép)
             OrderService.AcceptOrder(id);
@@ -200,7 +204,8 @@ namespace _20T1020670.Web.Controllers
             if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
             {
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
-                return RedirectToAction("Details");
+                return RedirectToAction($"Details/{id}");
+
             }
             //TODO: Code chức năng chuyển đơn hàng sang trạng thái đang giao hàng (nếu được phép)
             ViewBag.OrderID = id;
@@ -219,7 +224,8 @@ namespace _20T1020670.Web.Controllers
             if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
             {
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
-                return RedirectToAction("Details");
+                return RedirectToAction($"Details/{id}");
+
             }
             //TODO: Code chức năng ghi nhận hoàn tất đơn hàng (nếu được phép)
             OrderService.FinishOrder(id);
@@ -236,7 +242,8 @@ namespace _20T1020670.Web.Controllers
             if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
             {
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
-                return RedirectToAction("Details");
+                return RedirectToAction($"Details/{id}");
+
             }
             //TODO: Code chức năng hủy đơn hàng (nếu được phép)
             OrderService.CancelOrder(id);
@@ -253,7 +260,8 @@ namespace _20T1020670.Web.Controllers
             if (OrderService.GetOrder(id).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
             {
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
-                return RedirectToAction("Details");
+                return RedirectToAction($"Details/{id}");
+
             }
             //TODO: Code chức năng từ chối đơn hàng (nếu được phép)
 
