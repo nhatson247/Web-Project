@@ -229,6 +229,10 @@ namespace _20T1020670.Web.Controllers
             switch (method)
             {
                 case "add":
+                    if (productID <= 0)
+                    {
+                        return RedirectToAction($"Edit/{productID}");
+                    }
                     var data = new ProductPhoto()
                     {
                         PhotoID = 0,
@@ -238,11 +242,11 @@ namespace _20T1020670.Web.Controllers
                     return View(data);
                 case "edit":
                     if (photoID == 0)
-                        return RedirectToAction("Index");
+                        return RedirectToAction($"Edit/{productID}");
 
                     data = ProductDataService.GetPhoto(photoID);
                     if (data == null)
-                        return RedirectToAction("Index");
+                        return RedirectToAction($"Edit/{productID}");
                     ViewBag.Title = "Thay đổi ảnh";
                     return View(data);
                 case "delete":
@@ -272,7 +276,7 @@ namespace _20T1020670.Web.Controllers
                 uploadPhoto.SaveAs(filePath);
                 data.Photo = fileName;
             }
-            else
+            if(string.IsNullOrWhiteSpace(data.Photo))
             {
                 ModelState.AddModelError("Photo", "Vui lòng chọn ảnh");
             }
@@ -312,6 +316,10 @@ namespace _20T1020670.Web.Controllers
             switch (method)
             {
                 case "add":
+                    if(productID <= 0)
+                    {
+                        return RedirectToAction($"Edit/{productID}");
+                    }
                     var data = new ProductAttribute()
                     {
                         AttributeID = 0,
@@ -321,11 +329,11 @@ namespace _20T1020670.Web.Controllers
                     return View(data);
                 case "edit":
                     if (attributeID == 0)
-                        return RedirectToAction("Index");
+                        return RedirectToAction($"Edit/{productID}");
 
                     data = ProductDataService.GetAttribute(attributeID);
                     if (data == null)
-                        return RedirectToAction("Index");
+                        return RedirectToAction($"Edit/{productID}");
                     ViewBag.Title = "Thay đổi thuộc tính";
                     return View(data);
                 case "delete":

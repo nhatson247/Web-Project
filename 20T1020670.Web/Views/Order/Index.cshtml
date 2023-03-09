@@ -2,9 +2,17 @@
 
 @{
     ViewBag.Title = "Tra cứu đơn hàng";
+    string successMessage = ViewBag.SuccessMessage.ToString();
 }
 
 <div class="box box-primary">
+    @if (!string.IsNullOrWhiteSpace(successMessage))
+    {
+        <div class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Thông báo: </strong> @successMessage
+        </div>
+    }
     <div class="box-body">
         <!--Form đầu vào tìm kiếm-->
         <form id="formSearch" action="~/Order/Search">

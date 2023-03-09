@@ -22,6 +22,7 @@
                     <input type="file"
                            style="margin-top: 8px"
                            name="uploadPhoto"
+                          
                            onchange="document.getElementById('photo').src = window.URL.createObjectURL(this.files[0])" />
                     @Html.ValidationMessageFor(m => m.Photo, "", new { @class = "text-danger" })
 

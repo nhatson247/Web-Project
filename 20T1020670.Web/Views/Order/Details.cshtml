@@ -3,15 +3,25 @@
 @{
     ViewBag.Title = "Quản lý đơn hàng";
     string errorMessage = ViewBag.ErrorMessage.ToString();
+    string successMessage = ViewBag.SuccessMessage.ToString();
+
+
 }
 
 <div class="box box-primary">
     <div class="box-header text-right">
         @if (!string.IsNullOrWhiteSpace(errorMessage))
         {
-            <div class="alert alert-warning alert-dismissible text-left">
+            <div class="alert alert-danger alert-dismissible text-left">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Lỗi!</strong> @errorMessage
+                <strong>!Lỗi:</strong> @errorMessage
+            </div>
+        }
+        @if (!string.IsNullOrWhiteSpace(successMessage))
+        {
+            <div class="alert alert-success alert-dismissible text-left">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Thông báo: </strong> @successMessage
             </div>
         }
         <div class="btn-group">
@@ -81,7 +91,7 @@
             </div>
             <label class="control-label col-sm-2">Ngày lập đơn hàng:</label>
             <div class="col-sm-4">
-                <p class="form-control-static">@Model.OrderTime</p>
+                <p class="form-control-static">@(Model.OrderTime == null ? "" : Model.OrderTime.ToString("dd/MM/yyyy H:mm"))</p>
             </div>
             <label class="control-label col-sm-2">Nhân viên phụ trách:</label>
             <div class="col-sm-4">
@@ -89,7 +99,7 @@
             </div>
             <label class="control-label col-sm-2">Ngày nhận đơn</label>
             <div class="col-sm-4">
-                <p class="form-control-static">@Model.AcceptTime</p>
+                <p class="form-control-static">@(Model.AcceptTime == null ? "" : Model.AcceptTime.Value.ToString("dd/MM/yyyy H:mm"))</p>
             </div>
         </div>
 
@@ -123,7 +133,7 @@
             </div>
             <label class="control-label col-sm-2">Nhận giao hàng lúc:</label>
             <div class="col-sm-4">
-                <p class="form-control-static">@Model.ShippedTime</p>
+                <p class="form-control-static">@(Model.ShippedTime == null ? "" : Model.ShippedTime.Value.ToString("dd/MM/yyyy H:mm"))</p>
             </div>
         </div>
 
@@ -134,7 +144,7 @@
             </div>
             <label class="control-label col-sm-2">Thời điểm hoàn tất:</label>
             <div class="col-sm-4">
-                <p class="form-control-static">@Model.FinishedTime</p>
+                <p class="form-control-static">@(Model.FinishedTime == null ? "" : Model.FinishedTime.Value.ToString("dd/MM/yyyy H:mm"))</p>
             </div>
         </div>
     </div>
