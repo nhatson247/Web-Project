@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Codes\Code.cs" />
     <Compile Include="Codes\Converter.cs" />
     <Compile Include="Codes\SelectListHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -6550,8 +6551,8 @@
     <Content Include="Views\Order\Details.cshtml" />
     <Content Include="Views\Order\EditDetail.cshtml" />
     <Content Include="Views\Order\SearchProducts.cshtml" />
-    <Content Include="Views\Order\Shipping.cshtml" />
     <Content Include="Views\Order\Search.cshtml" />
+    <Content Include="Views\Order\SelectShipper.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

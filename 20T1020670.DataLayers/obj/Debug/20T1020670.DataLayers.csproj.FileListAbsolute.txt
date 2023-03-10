@@ -1,9 +1,0 @@
-N:\Web_ASP\20T1020670\20T1020670.DataLayers\bin\Debug\20T1020670.DataLayers.dll
-N:\Web_ASP\20T1020670\20T1020670.DataLayers\bin\Debug\20T1020670.DataLayers.pdb
-N:\Web_ASP\20T1020670\20T1020670.DataLayers\obj\Debug\20T1020670.DataLayers.csproj.AssemblyReference.cache
-N:\Web_ASP\20T1020670\20T1020670.DataLayers\obj\Debug\20T1020670.DataLayers.csproj.CoreCompileInputs.cache
-N:\Web_ASP\20T1020670\20T1020670.DataLayers\obj\Debug\20T1020670.DataLayers.dll
-N:\Web_ASP\20T1020670\20T1020670.DataLayers\obj\Debug\20T1020670.DataLayers.pdb
-N:\Web_ASP\20T1020670\20T1020670.DataLayers\bin\Debug\20T1020670.DomainModels.dll
-N:\Web_ASP\20T1020670\20T1020670.DataLayers\bin\Debug\20T1020670.DomainModels.pdb
-N:\Web_ASP\20T1020670\20T1020670.DataLayers\obj\Debug\20T1020670.DataLayers.csproj.CopyComplete

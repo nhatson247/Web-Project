@@ -1,6 +1,0 @@
-N:\Web_ASP\20T1020670\20T1020670.DomainModels\bin\Debug\20T1020670.DomainModels.dll
-N:\Web_ASP\20T1020670\20T1020670.DomainModels\bin\Debug\20T1020670.DomainModels.pdb
-N:\Web_ASP\20T1020670\20T1020670.DomainModels\obj\Debug\20T1020670.DomainModels.csproj.CoreCompileInputs.cache
-N:\Web_ASP\20T1020670\20T1020670.DomainModels\obj\Debug\20T1020670.DomainModels.dll
-N:\Web_ASP\20T1020670\20T1020670.DomainModels\obj\Debug\20T1020670.DomainModels.pdb
-N:\Web_ASP\20T1020670\20T1020670.DomainModels\obj\Debug\20T1020670.DomainModels.csproj.AssemblyReference.cache

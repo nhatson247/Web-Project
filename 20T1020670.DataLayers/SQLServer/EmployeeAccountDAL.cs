@@ -40,7 +40,7 @@ namespace _20T1020670.DataLayers.SQLServer
                         {
                             UserId = Convert.ToString(dbReader["EmployeeID"]),
                             UserName = Convert.ToString(dbReader["Email"]),
-                            FullName = $"{ dbReader["FirstName"]}{ dbReader["LastName"]}",
+                            FullName = $"{dbReader["FirstName"]} {dbReader["LastName"]}",
                             Email = Convert.ToString(dbReader["Email"]),
                             Photo = Convert.ToString(dbReader["Photo"]),
                             Notes = Convert.ToString(dbReader["Notes"]),

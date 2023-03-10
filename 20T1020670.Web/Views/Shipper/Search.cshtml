@@ -37,13 +37,12 @@
     </tbody>
 
 </table>
-
 <div class="text-center">
     <ul class="pagination ">
         @if (Model.Page != 1)
         {
             <li class="paginate_button">
-                <a href="javascript:;" onclick="doSearch(1)"><<</a>
+                <a href="javascript:;" onclick="doSearch(1)"> First </a>
             </li>
             <li class="paginate_button">
                 <a href="javascript:;" onclick="doSearch(@Model.Page - 1)"><</a>
@@ -98,10 +97,9 @@
                 <a href="javascript:;" onclick="doSearch(@Model.Page + 1)">></a>
             </li>
             <li class="paginate_button">
-                <a href="javascript:;" onclick="doSearch(@Model.PageCount)">>></a>
+                <a href="javascript:;" onclick="doSearch(@Model.PageCount)"> End </a>
             </li>
         }
 
     </ul>
 </div>
-

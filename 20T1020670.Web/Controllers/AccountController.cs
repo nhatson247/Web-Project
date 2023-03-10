@@ -25,6 +25,8 @@ namespace _20T1020670.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            var employeeCookie = Converter.CookieToUserAccount(User.Identity.Name);
+            if(employeeCookie != null) return RedirectToAction("Index", "Home");
             return View();
         }
         public ActionResult ChangePassword()
@@ -59,7 +61,6 @@ namespace _20T1020670.Web.Controllers
             string cookieValue = Newtonsoft.Json.JsonConvert.SerializeObject(userAccount);
             FormsAuthentication.SetAuthCookie(cookieValue, false);
             return RedirectToAction("Index", "Home");
-
         }
         /// <summary>
         /// log out
@@ -74,13 +75,12 @@ namespace _20T1020670.Web.Controllers
 
         [HttpPost]
         public ActionResult ChangePassword(string userName = "", string oldPassword = "", string newPassword = "")
-            {
+        {
             ViewBag.UserName = userName;
-            if ( string.IsNullOrWhiteSpace(oldPassword) || string.IsNullOrWhiteSpace(newPassword))
-                {
+            if (string.IsNullOrWhiteSpace(oldPassword) || string.IsNullOrWhiteSpace(newPassword))
+            {
                 ModelState.AddModelError("", "Vui lòng nhập đủ thông tin");
                 return View();
-
             }
             var check = UserAccountService.ChangePassword(AccountTypes.Employee, userName, oldPassword, newPassword);
             if (check == false)
@@ -88,7 +88,8 @@ namespace _20T1020670.Web.Controllers
                 ModelState.AddModelError("", "Mật khẩu cũ không đúng");
                 return View();
             }
-            return RedirectToAction("Login");
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Logout");
         }
 
     }

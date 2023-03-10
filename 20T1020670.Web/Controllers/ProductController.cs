@@ -113,74 +113,79 @@ namespace _20T1020670.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Product data, string price, HttpPostedFileBase uploadPhoto)
         {
-            
-            decimal? d = Converter.StringToDecimal(price);
-            if (d == null)
-                ModelState.AddModelError("Price", "Giá không hợp lệ");
-            else
-                data.Price = d.Value;
-        
-            if (string.IsNullOrWhiteSpace(data.ProductName))
-                ModelState.AddModelError("ProductName", "Tên mặt hàng không được để trống");
-            if (data.SupplierID == 0 )
-                ModelState.AddModelError("SupplierID", "Vui lòng chọn nhà cung cấp");
-            if (data.CategoryID == 0)
-                ModelState.AddModelError("CategoryID", "Vui lòng chọn loại hàng");
-            if (string.IsNullOrWhiteSpace(data.Unit))
-                ModelState.AddModelError("Unit", "Đơn vị tính không được để trống");
-            if (data.Price == 0)
-                ModelState.AddModelError("Price", "Vui lòng nhập giá");
-
-            var model = new ProductModel()
-            {
-                ProductID = data.ProductID,
-                ProductName = data.ProductName,
-                CategoryID = data.CategoryID,
-                SupplierID = data.SupplierID,
-                Unit = data.Unit,
-                Price = data.Price,
-                Photo = data.Photo,
-                Attributes = ProductDataService.ListAttributes(data.ProductID),
-                Photos = ProductDataService.ListPhotos(data.ProductID)
-            };
-            if (!ModelState.IsValid)
-            {
-                if (data.ProductID == 0)
-                    return View("Create", data);
+            try {
+                decimal? d = Converter.StringToDecimal(price);
+                if (d == null)
+                    ModelState.AddModelError("Price", "Giá không hợp lệ");
                 else
-                    return View("Edit", model);
-            }
-            if (string.IsNullOrWhiteSpace(data.Photo))
-            {
-                data.Photo = "";
-            }
+                    data.Price = d.Value;
 
-            if (uploadPhoto != null)
-            {
-                string path = Server.MapPath("~/Photo");
-                string fileName = $"{DateTime.Now.Ticks}_{uploadPhoto.FileName}";
-                string filePath = System.IO.Path.Combine(path, fileName);
-                uploadPhoto.SaveAs(filePath);
-                data.Photo = fileName;
-            }
-            else
-            {
-                ModelState.AddModelError("Photo", "Vui lòng chọn ảnh");
-            }
-            if (!ModelState.IsValid)
-            {
+                if (string.IsNullOrWhiteSpace(data.ProductName))
+                    ModelState.AddModelError("ProductName", "Tên mặt hàng không được để trống");
+                if (data.SupplierID == 0)
+                    ModelState.AddModelError("SupplierID", "Vui lòng chọn nhà cung cấp");
+                if (data.CategoryID == 0)
+                    ModelState.AddModelError("CategoryID", "Vui lòng chọn loại hàng");
+                if (string.IsNullOrWhiteSpace(data.Unit))
+                    ModelState.AddModelError("Unit", "Đơn vị tính không được để trống");
+                if (data.Price == 0)
+                    ModelState.AddModelError("Price", "Vui lòng nhập giá");
+
+                var model = new ProductModel()
+                {
+                    ProductID = data.ProductID,
+                    ProductName = data.ProductName,
+                    CategoryID = data.CategoryID,
+                    SupplierID = data.SupplierID,
+                    Unit = data.Unit,
+                    Price = data.Price,
+                    Photo = data.Photo,
+                    Attributes = ProductDataService.ListAttributes(data.ProductID),
+                    Photos = ProductDataService.ListPhotos(data.ProductID)
+                };
+                if (!ModelState.IsValid)
+                {
+                    if (data.ProductID == 0)
+                        return View("Create", data);
+                    else
+                        return View("Edit", model);
+                }
+                if (string.IsNullOrWhiteSpace(data.Photo))
+                {
+                    data.Photo = "";
+                }
+
+                if (uploadPhoto != null)
+                {
+                    string path = Server.MapPath("~/Photo");
+                    string fileName = $"{DateTime.Now.Ticks}_{uploadPhoto.FileName}";
+                    string filePath = System.IO.Path.Combine(path, fileName);
+                    uploadPhoto.SaveAs(filePath);
+                    data.Photo = fileName;
+                }
+                else
+                {
+                    ModelState.AddModelError("Photo", "Vui lòng chọn ảnh");
+                }
+                if (!ModelState.IsValid)
+                {
+                    if (data.ProductID == 0)
+                        return View("Create", data);
+                }
+
                 if (data.ProductID == 0)
-                    return View("Create", data);
+                {
+                    ProductDataService.AddProduct(data);
+                }
+                else
+                    ProductDataService.UpdateProduct(data);
+                return RedirectToAction("Index");
             }
-
-            if (data.ProductID == 0)
+            catch
             {
-                ProductDataService.AddProduct(data);
+                // ghi lại log lỗi 
+                return Content("Có lỗi xảy ra, vui lòng thử lại sau!");
             }
-            else
-                ProductDataService.UpdateProduct(data);
-            return RedirectToAction("Index");
-
         }
 
 

@@ -41,6 +41,10 @@ namespace _20T1020670.Web.Controllers
 
         //    return View(data);
         //}
+        /// <summary>
+        /// Tìm kiếm, phân trang người giao hàng
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             PaginationSearchInput condition = Session[SHIPPER_SEARCH] as PaginationSearchInput;
@@ -73,7 +77,7 @@ namespace _20T1020670.Web.Controllers
             return View(result);
         }
         /// <summary>
-        /// 
+        /// Bổ sung người giao hàng
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
@@ -87,9 +91,14 @@ namespace _20T1020670.Web.Controllers
             return View("Edit", data);
         }
 
+        /// <summary>
+        /// Lưu dữ liệu người giao hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        
         public ActionResult Save(Shipper data)
         {
             try
@@ -122,7 +131,7 @@ namespace _20T1020670.Web.Controllers
            
         }
         /// <summary>
-        /// 
+        /// Chỉnh sửa thông tin người giao hàng
         /// </summary>
         /// <returns></returns>
         public ActionResult Edit(int id = 0)
@@ -141,7 +150,7 @@ namespace _20T1020670.Web.Controllers
             return View(data);
         }
         /// <summary>
-        /// 
+        /// Xóa người giao hàng
         /// </summary>
         /// <returns></returns>
         public ActionResult Delete(int id = 0)

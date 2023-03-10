@@ -41,6 +41,11 @@ namespace _20T1020670.Web.Controllers
 
         //    return View(data);
         //}
+
+        /// <summary>
+        /// tìm kiếm, phân trang khách hàng
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             PaginationSearchInput condition = Session[CUSTOMER_SEARCH] as PaginationSearchInput;
@@ -73,7 +78,7 @@ namespace _20T1020670.Web.Controllers
             return View(result);
         }
         /// <summary>
-        /// 
+        /// Bổ sung Khách Hàng
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
@@ -86,7 +91,11 @@ namespace _20T1020670.Web.Controllers
             ViewBag.Title = "Bổ sung Khách Hàng";
             return View("Edit", data);
         }
-
+        /// <summary>
+        /// lưu thông tin khách hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -140,7 +149,7 @@ namespace _20T1020670.Web.Controllers
            
         }
         /// <summary>
-        /// 
+        /// chỉnh sửa thông tin khách hàng
         /// </summary>
         /// <returns></returns>
         public ActionResult Edit(int id = 0)
@@ -158,7 +167,7 @@ namespace _20T1020670.Web.Controllers
             return View(data);
         }
         /// <summary>
-        /// 
+        /// xóa khách hàng
         /// </summary>
         /// <returns></returns>
         public ActionResult Delete(int id = 0)

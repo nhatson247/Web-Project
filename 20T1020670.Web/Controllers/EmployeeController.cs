@@ -42,6 +42,10 @@ namespace _20T1020670.Web.Controllers
 
         //       return View(data);
         //   }
+        /// <summary>
+        /// Phân trang, tìm kiếm nhân viên
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             PaginationSearchInput condition = Session[EMPLOYEE_SEARCH] as PaginationSearchInput;
@@ -74,7 +78,7 @@ namespace _20T1020670.Web.Controllers
             return View(result);
         }
         /// <summary>
-        /// 
+        /// Bổ sung Nhân Viên
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
@@ -87,14 +91,20 @@ namespace _20T1020670.Web.Controllers
             ViewBag.Title = "Bổ sung Nhân Viên";
             return View("Edit", data);
         }
-
+        /// <summary>
+        /// lưu trữ thông tin nhân viên
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="birthday"></param>
+        /// <param name="uploadPhoto"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(Employee data, string birthday, HttpPostedFileBase uploadPhoto)
         {
-            //try
-            //{
-            DateTime? d = Converter.DMYStringToDateTime(birthday);
+            try
+            {
+                DateTime? d = Converter.DMYStringToDateTime(birthday);
             if (d == null)
                 ModelState.AddModelError("BirthDate", $"Ngày {birthday} không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy");
             else
@@ -141,16 +151,16 @@ namespace _20T1020670.Web.Controllers
                 CommonDataService.UpdateEmployee(data);
             }
             return RedirectToAction("Index");
-            //}
-            //catch
-            //{
-            //    // ghi lại log lỗi 
-            //    return Content("Có lỗi xảy ra, vui lòng thử lại sau!");
-            //}
+            }  
+            catch
+            {
+                // ghi lại log lỗi 
+                return Content("Có lỗi xảy ra, vui lòng thử lại sau!");
+            }
 
         }
         /// <summary>
-        /// 
+        /// chỉnh sửa thông tin nhân viên
         /// </summary>
         /// <returns></returns>
         public ActionResult Edit(int id = 0)
@@ -169,7 +179,7 @@ namespace _20T1020670.Web.Controllers
             return View(data);
         }
         /// <summary>
-        /// 
+        /// xóa nhân viên
         /// </summary>
         /// <returns></returns>
         public ActionResult Delete(int id = 0)

@@ -21,7 +21,7 @@ namespace _20T1020670.Web.Controllers
         /// </summary>
         private const int PAGE_SIZE = 10;
         private const string SUPPLIER_SEARCH = "SearchSupplierCondition";
-      
+
         // GET: Supplier
         //public ActionResult Index(int page = 1, int pageSize = 5, string searchValue = "")
         //{
@@ -41,10 +41,14 @@ namespace _20T1020670.Web.Controllers
 
         //    return View(data);
         //}
+        /// <summary>
+        /// Tìm kiếm, phân trang nhà cung cấp
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             PaginationSearchInput condition = Session[SUPPLIER_SEARCH] as PaginationSearchInput;
-            if(condition == null)
+            if (condition == null)
             {
                 condition = new PaginationSearchInput()
                 {
@@ -55,25 +59,31 @@ namespace _20T1020670.Web.Controllers
             }
             return View(condition);
         }
-    public ActionResult Search(PaginationSearchInput condition)
-    {
-        int rowcount = 0;
-        var data = CommonDataService.ListOfSuppliers(condition.Page, condition.PageSize, condition.SearchValue,
-            out rowcount);
-        var result = new SupplierSearchOutput()
-        {
-            Page = condition.Page,
-            PageSize = condition.PageSize,
-            SearchValue = condition.SearchValue,
-            RowCount = rowcount,
-            Data = data
-        };
-            Session[SUPPLIER_SEARCH] = condition;
-
-        return View(result);
-    }
         /// <summary>
         /// 
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public ActionResult Search(PaginationSearchInput condition)
+        {
+            int rowcount = 0;
+            var data = CommonDataService.ListOfSuppliers(condition.Page, condition.PageSize, condition.SearchValue,
+                out rowcount);
+            var result = new SupplierSearchOutput()
+            {
+                Page = condition.Page,
+                PageSize = condition.PageSize,
+                SearchValue = condition.SearchValue,
+                RowCount = rowcount,
+                Data = data
+            };
+            Session[SUPPLIER_SEARCH] = condition;
+
+            return View(result);
+        }
+
+        /// <summary>
+        /// Bổ sung nhà Cung Cấp
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
@@ -87,7 +97,7 @@ namespace _20T1020670.Web.Controllers
             return View("Edit", data);
         }
         /// <summary>
-        /// 
+        /// Lưu giữ liệu nhà cung cấp
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -144,7 +154,7 @@ namespace _20T1020670.Web.Controllers
           
         }
         /// <summary>
-        /// 
+        /// Chỉnh sửa thông tin nhà cung cấp 
         /// </summary>
         /// <returns></returns>
         public ActionResult Edit(int id = 0)
@@ -164,7 +174,7 @@ namespace _20T1020670.Web.Controllers
             return View(data);
         }
         /// <summary>
-        /// 
+        /// Xóa nhà cung cấp
         /// </summary>
         /// <returns></returns>
         public ActionResult Delete(int id = 0)

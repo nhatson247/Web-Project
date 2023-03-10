@@ -26,7 +26,7 @@ namespace _20T1020670.DomainModels
         /// <summary>
         /// Ngày sinh
         /// </summary>
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; } 
         /// <summary>
         /// Ảnh
         /// </summary>

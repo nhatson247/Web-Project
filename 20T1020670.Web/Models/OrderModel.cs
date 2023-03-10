@@ -15,7 +15,10 @@ namespace _20T1020670.Web.Models
         /// Danh sách chi tiết hóa đơn
         /// </summary>
         public List<OrderDetail> OrderDetails { get; set; }
-
+        /// <summary>
+        /// Danh sách trạng thái hóa đơn
+        /// </summary>
+        public List<OrderStatus> Statuses { get; set; }
 
     }
 }
