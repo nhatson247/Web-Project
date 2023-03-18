@@ -116,6 +116,8 @@ namespace _20T1020670.Web.Controllers
         /// <param name="orderID"></param>
         /// <param name="productID"></param>
         /// <returns></returns>
+        /// 
+        [ValidateAntiForgeryToken]
         [Route("EditDetail/{orderID?}/{productID?}")]
         public ActionResult EditDetail(int orderID = 0, int productID = 0)
         {
