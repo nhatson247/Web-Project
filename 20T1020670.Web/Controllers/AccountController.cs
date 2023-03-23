@@ -82,6 +82,11 @@ namespace _20T1020670.Web.Controllers
                 ModelState.AddModelError("", "Vui lòng nhập đủ thông tin");
                 return View();
             }
+            if (newPassword.Length < 6)
+            {
+                ModelState.AddModelError("", "Mật khẩu mới phải có ít nhất 6 kí tự");
+                return View();
+            }
             var check = UserAccountService.ChangePassword(AccountTypes.Employee, userName, oldPassword, newPassword);
             if (check == false)
             {

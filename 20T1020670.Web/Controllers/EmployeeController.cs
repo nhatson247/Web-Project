@@ -105,53 +105,52 @@ namespace _20T1020670.Web.Controllers
             try
             {
                 DateTime? d = Converter.DMYStringToDateTime(birthday);
-            if (d == null)
-                ModelState.AddModelError("BirthDate", $"Ngày {birthday} không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy");
-            else
-                data.BirthDate = d.Value;
-            // kiểm soát đầu vào 
-            if (string.IsNullOrWhiteSpace(data.LastName))
-                ModelState.AddModelError("LastName", "Họ đệm không được để trống");
-            ///
-            if (string.IsNullOrWhiteSpace(data.FirstName))
-                ModelState.AddModelError("FirstName", "Tên không được để trống");
-            ///
-            if (string.IsNullOrWhiteSpace(data.BirthDate.ToLongDateString()))
-                ModelState.AddModelError("BirthDate", "Ngày sinh không được để trống");
-            ///
-            if (string.IsNullOrWhiteSpace(data.Photo))
-                data.Photo = "";
-            ///
-            if (string.IsNullOrWhiteSpace(data.Email))
-                ModelState.AddModelError("Email", "Email không được để trống");
+                if (d == null)
+                    ModelState.AddModelError("BirthDate", $"Ngày {birthday} không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy");
+                else
+                    data.BirthDate = d.Value;
+                // kiểm soát đầu vào 
+                if (string.IsNullOrWhiteSpace(data.LastName))
+                    ModelState.AddModelError("LastName", "Họ đệm không được để trống");
+                ///
+                if (string.IsNullOrWhiteSpace(data.FirstName))
+                    ModelState.AddModelError("FirstName", "Tên không được để trống");
+                ///
+                if (string.IsNullOrWhiteSpace(data.BirthDate.ToLongDateString()))
+                    ModelState.AddModelError("BirthDate", "Ngày sinh không được để trống");
+                ///
+                if (string.IsNullOrWhiteSpace(data.Photo))
+                    data.Photo = "";
+                ///
+                if (string.IsNullOrWhiteSpace(data.Email))
+                    ModelState.AddModelError("Email", "Email không được để trống");
+                //
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.Title = data.EmployeeID == 0 ? "Bổ sung nhân viên" : "Cập nhập nhân viên";
+                    return View("Edit", data);
+                }
 
-            //
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Title = data.EmployeeID == 0 ? "Bổ sung nhân viên" : "Cập nhập nhân viên";
-                return View("Edit", data);
-            }
-
-            if (uploadPhoto != null)
-            {
-                string path = Server.MapPath("~/Photo");
-                string fileName = $"{DateTime.Now.Ticks}_{uploadPhoto.FileName}";
-                string filePath = System.IO.Path.Combine(path, fileName);
-                uploadPhoto.SaveAs(filePath);
-                data.Photo = fileName;
-            }
+                if (uploadPhoto != null)
+                {
+                    string path = Server.MapPath("~/Photo");
+                    string fileName = $"{DateTime.Now.Ticks}_{uploadPhoto.FileName}";
+                    string filePath = System.IO.Path.Combine(path, fileName);
+                    uploadPhoto.SaveAs(filePath);
+                    data.Photo = fileName;
+                }
 
 
-            if (data.EmployeeID == 0)
-            {
-                CommonDataService.AddEmployee(data);
+                if (data.EmployeeID == 0)
+                {
+                    CommonDataService.AddEmployee(data);
+                }
+                else
+                {
+                    CommonDataService.UpdateEmployee(data);
+                }
+                return RedirectToAction("Index");
             }
-            else
-            {
-                CommonDataService.UpdateEmployee(data);
-            }
-            return RedirectToAction("Index");
-            }  
             catch
             {
                 // ghi lại log lỗi 
