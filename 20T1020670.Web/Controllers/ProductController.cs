@@ -111,14 +111,9 @@ namespace _20T1020670.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Product data, string price, HttpPostedFileBase uploadPhoto)
+        public ActionResult Save(Product data, HttpPostedFileBase uploadPhoto)
         {
             try {
-                decimal? d = Converter.StringToDecimal(price);
-                if (d == null)
-                    ModelState.AddModelError("Price", "Giá không hợp lệ");
-                else
-                    data.Price = d.Value;
 
                 if (string.IsNullOrWhiteSpace(data.ProductName))
                     ModelState.AddModelError("ProductName", "Tên mặt hàng không được để trống");
