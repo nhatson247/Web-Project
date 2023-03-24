@@ -3,6 +3,7 @@ using _20T1020670.DomainModels;
 using _20T1020670.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -104,12 +105,25 @@ namespace _20T1020670.Web.Controllers
         {
             try
             {
-                DateTime? d = Converter.DMYStringToDateTime(birthday);
-                if (d == null)
-                    ModelState.AddModelError("BirthDate", $"Ngày {birthday} không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy");
-                else
-                    data.BirthDate = d.Value;
+                //if (d == null)
+                //    ModelState.AddModelError("BirthDate", $"Ngày {birthday} không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy");
+                //else
+                //    data.BirthDate = d.Value;
                 // kiểm soát đầu vào 
+                DateTime? d = Converter.DMYStringToDateTime(birthday);
+                // Kiểm soát đàu vào 
+                if (d == null)
+                    ModelState.AddModelError("BirthDate", $"Ngày {birthday} không hợp lệ");
+                else
+                {
+                    //Kiểm tra thời gian trong giới hạn của sql 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM
+                    if (d.Value < SqlDateTime.MinValue.Value || d.Value > SqlDateTime.MaxValue)
+                    {
+                        ModelState.AddModelError("BirthDate", "Giới hạn ngày 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM");
+                    }
+                    else
+                        data.BirthDate = d.Value;
+                }
                 if (string.IsNullOrWhiteSpace(data.LastName))
                     ModelState.AddModelError("LastName", "Họ đệm không được để trống");
                 ///
@@ -124,6 +138,13 @@ namespace _20T1020670.Web.Controllers
                 ///
                 if (string.IsNullOrWhiteSpace(data.Email))
                     ModelState.AddModelError("Email", "Email không được để trống");
+                var email = CommonDataService.ListOfEmployees(data.Email);
+                    if(email.Count > 0 && data.EmployeeID == 0)
+                    ModelState.AddModelError("Email", "Vui Lòng Nhập Email Khác");
+
+                //
+                if (string.IsNullOrWhiteSpace(data.Notes))
+                    ModelState.AddModelError("Notes", "Ghi chú không được để trống");
                 //
                 if (!ModelState.IsValid)
                 {
@@ -139,8 +160,6 @@ namespace _20T1020670.Web.Controllers
                     uploadPhoto.SaveAs(filePath);
                     data.Photo = fileName;
                 }
-
-
                 if (data.EmployeeID == 0)
                 {
                     CommonDataService.AddEmployee(data);
