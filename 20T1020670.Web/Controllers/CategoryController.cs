@@ -150,6 +150,8 @@ namespace _20T1020670.Web.Controllers
                 /// cách cho null 
                 ///return Content("id bằng 0");
                 return RedirectToAction("index");
+
+
             if (Request.HttpMethod == "GET")
             {
                 var data = CommonDataService.GetCategory(id);

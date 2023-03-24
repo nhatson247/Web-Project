@@ -66,9 +66,13 @@
                     @Html.HiddenFor(m => m.Photo)
                     <input type="file"
                            name="uploadPhoto"
+                           value="@Model.Photo"
                            onchange="document.getElementById('photo').src = window.URL.createObjectURL(this.files[0])" />
+                    @Html.ValidationMessageFor(m => m.Photo, "", new { @class = "text-danger" })
+
                 </div>
             </div>
+
 
             <div class="form-group">
                 <div class="col-lg-offset-2 col-sm-10">

@@ -175,7 +175,7 @@
                             <td class="text-right">@item.SalePrice</td>
                             <td class="text-right">@item.TotalPrice</td>
                             <td class="text-right">
-                                @if ((Model.Status == 1 || Model.Status == 2 ) && (int.Parse(userAccount.UserId) == Model.EmployeeID))
+                                @if ((Model.Status == 1 ) && (int.Parse(userAccount.UserId) == Model.EmployeeID))
                                 {
                                 <a href="~/Order/EditDetail/@item.OrderID/@item.ProductID" class="btn btn-xs btn-primary btn-modal">
                                     <i class="fa fa-edit"></i>

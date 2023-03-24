@@ -6557,6 +6557,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Photo\" />
+    <Folder Include="Views\Oder\" />
     <Folder Include="Views\TestController\" />
   </ItemGroup>
   <ItemGroup>

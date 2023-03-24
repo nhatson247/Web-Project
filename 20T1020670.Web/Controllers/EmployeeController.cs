@@ -138,11 +138,11 @@ namespace _20T1020670.Web.Controllers
                 ///
                 if (string.IsNullOrWhiteSpace(data.Email))
                     ModelState.AddModelError("Email", "Email không được để trống");
+                ///
                 var email = CommonDataService.ListOfEmployees(data.Email);
-                    if(email.Count > 0 && data.EmployeeID == 0)
+                if (email.Count > 0 && data.EmployeeID == 0)
                     ModelState.AddModelError("Email", "Vui Lòng Nhập Email Khác");
-
-                //
+                ///
                 if (string.IsNullOrWhiteSpace(data.Notes))
                     ModelState.AddModelError("Notes", "Ghi chú không được để trống");
                 //

@@ -55,8 +55,8 @@ N:\Web_ASP\20T1020670\20T1020670.Web\bin\System.Web.WebPages.Razor.xml
 N:\Web_ASP\20T1020670\20T1020670.Web\bin\Newtonsoft.Json.xml
 N:\Web_ASP\20T1020670\20T1020670.Web\bin\Antlr3.Runtime.pdb
 N:\Web_ASP\20T1020670\20T1020670.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-N:\Web_ASP\20T1020670\20T1020670.Web\obj\Debug\20T1020670.Web.csproj.AssemblyReference.cache
 N:\Web_ASP\20T1020670\20T1020670.Web\obj\Debug\20T1020670.Web.csproj.CoreCompileInputs.cache
 N:\Web_ASP\20T1020670\20T1020670.Web\obj\Debug\20T1020670.Web.csproj.CopyComplete
 N:\Web_ASP\20T1020670\20T1020670.Web\obj\Debug\20T1020670.Web.dll
 N:\Web_ASP\20T1020670\20T1020670.Web\obj\Debug\20T1020670.Web.pdb
+N:\Web_ASP\20T1020670\20T1020670.Web\obj\Debug\20T1020670.Web.csproj.AssemblyReference.cache

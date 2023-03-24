@@ -116,12 +116,11 @@ namespace _20T1020670.Web.Controllers
         /// <param name="orderID"></param>
         /// <param name="productID"></param>
         /// <returns></returns>
-        /// 
         [Route("EditDetail/{orderID?}/{productID?}")]
         public ActionResult EditDetail(int orderID = 0, int productID = 0)
         {
             //TODO: Code chức năng để lấy chi tiết đơn hàng cần edit
-
+ 
             if (OrderService.GetOrder(orderID) == null && OrderService.GetOrder(productID) == null)
             {
                 return RedirectToAction("Index");
@@ -173,12 +172,13 @@ namespace _20T1020670.Web.Controllers
         public ActionResult DeleteDetail(int orderID = 0, int productID = 0)
         {
             //TODO: Code chức năng xóa 1 chi tiết trong đơn hàng
+        
+
             if (OrderService.GetOrder(orderID) == null && OrderService.GetOrder(productID) == null)
             {
                 return RedirectToAction("Index");
 
             }
-
             if (OrderService.GetOrder(orderID).EmployeeID != int.Parse(Converter.CookieToUserAccount(User.Identity.Name).UserId))
             {
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
@@ -264,6 +264,7 @@ namespace _20T1020670.Web.Controllers
                 TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
                 return RedirectToAction($"Details/{id}");
             }
+           
 
             OrderService.AcceptOrder(id);
             TempData[SUCCESS_MESSAGE] = "Đơn hàng đã được duyệt";

@@ -111,9 +111,14 @@ namespace _20T1020670.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Product data, HttpPostedFileBase uploadPhoto)
+        public ActionResult Save(Product data, string price, HttpPostedFileBase uploadPhoto)
         {
             try {
+                decimal? d = Converter.StringToDecimal(price);
+                if (d == null)
+                    ModelState.AddModelError("Price", "Giá không hợp lệ");
+                else
+                    data.Price = d.Value;
 
                 if (string.IsNullOrWhiteSpace(data.ProductName))
                     ModelState.AddModelError("ProductName", "Tên mặt hàng không được để trống");
@@ -125,7 +130,7 @@ namespace _20T1020670.Web.Controllers
                     ModelState.AddModelError("Unit", "Đơn vị tính không được để trống");
                 if (data.Price == 0)
                     ModelState.AddModelError("Price", "Vui lòng nhập giá");
-
+               
                 var model = new ProductModel()
                 {
                     ProductID = data.ProductID,
@@ -148,6 +153,7 @@ namespace _20T1020670.Web.Controllers
                 if (string.IsNullOrWhiteSpace(data.Photo))
                 {
                     data.Photo = "";
+
                 }
 
                 if (uploadPhoto != null)
@@ -183,8 +189,6 @@ namespace _20T1020670.Web.Controllers
             }
         }
 
-
-      
         /// <summary>
         /// Xóa mặt hàng
         /// </summary>
