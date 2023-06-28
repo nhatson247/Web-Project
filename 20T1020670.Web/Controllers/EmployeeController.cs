@@ -93,6 +93,25 @@ namespace _20T1020670.Web.Controllers
             return View("Edit", data);
         }
         /// <summary>
+        /// chỉnh sửa thông tin nhân viên
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Edit(int id = 0)
+        {
+            if (id == 0)
+                /// cách cho null 
+                ///return Content("id bằng 0");
+                return RedirectToAction("index");
+
+            var data = CommonDataService.GetEmployee(id);
+
+            if (data == null)
+                return RedirectToAction("index");
+
+            ViewBag.Title = "Cập nhật Nhân Viên";
+            return View(data);
+        }
+        /// <summary>
         /// lưu trữ thông tin nhân viên
         /// </summary>
         /// <param name="data"></param>
@@ -103,8 +122,8 @@ namespace _20T1020670.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Employee data, string birthday, HttpPostedFileBase uploadPhoto)
         {
-            try
-            {
+            //try
+            //{
                 //if (d == null)
                 //    ModelState.AddModelError("BirthDate", $"Ngày {birthday} không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy");
                 //else
@@ -139,19 +158,20 @@ namespace _20T1020670.Web.Controllers
                 if (string.IsNullOrWhiteSpace(data.Email))
                     ModelState.AddModelError("Email", "Email không được để trống");
                 ///
-                var email = CommonDataService.ListOfEmployees(data.Email);
-                if (email.Count > 0 && data.EmployeeID == 0)
-                    ModelState.AddModelError("Email", "Vui Lòng Nhập Email Khác");
+                var CountEmailE = CommonDataService.ListOfEmployees(data.Email);
+                if (CountEmailE.Count > 0)
+                {
+                ModelState.AddModelError("Email", "Vui Lòng Nhập Email Khác");
+                }
+                if (!ModelState.IsValid)
+                {
+                ViewBag.Title = data.EmployeeID == 0 ? "Bổ sung nhân viên" : "Cập nhập nhân viên";
+                return View("Edit", data);
+                 }
                 ///
                 if (string.IsNullOrWhiteSpace(data.Notes))
                     ModelState.AddModelError("Notes", "Ghi chú không được để trống");
                 //
-                if (!ModelState.IsValid)
-                {
-                    ViewBag.Title = data.EmployeeID == 0 ? "Bổ sung nhân viên" : "Cập nhập nhân viên";
-                    return View("Edit", data);
-                }
-
                 if (uploadPhoto != null)
                 {
                     string path = Server.MapPath("~/Photo");
@@ -169,33 +189,15 @@ namespace _20T1020670.Web.Controllers
                     CommonDataService.UpdateEmployee(data);
                 }
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                // ghi lại log lỗi 
-                return Content("Có lỗi xảy ra, vui lòng thử lại sau!");
-            }
+            //}
+            //catch
+            //{
+            //    // ghi lại log lỗi 
+            //    return Content("Có lỗi xảy ra, vui lòng thử lại sau!");
+            //}
 
         }
-        /// <summary>
-        /// chỉnh sửa thông tin nhân viên
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Edit(int id = 0)
-        {
-            if (id == 0)
-                /// cách cho null 
-                ///return Content("id bằng 0");
-                return RedirectToAction("index");
-
-            var data = CommonDataService.GetEmployee(id);
-
-            if (data == null)
-                return RedirectToAction("index");
-
-            ViewBag.Title = "Cập nhật Nhân Viên";
-            return View(data);
-        }
+    
         /// <summary>
         /// xóa nhân viên
         /// </summary>

@@ -76,20 +76,30 @@ namespace _20T1020670.Web.Controllers
         [HttpPost]
         public ActionResult ChangePassword(string userName = "", string oldPassword = "", string newPassword = "")
         {
-            ViewBag.UserName = userName;
+            if(Request.HttpMethod == "POST")
+            {
+                ViewBag.UserName = userName;
                 if (string.IsNullOrWhiteSpace(oldPassword) || string.IsNullOrWhiteSpace(newPassword))
-            {
-                ModelState.AddModelError("", "Vui lòng nhập đủ thông tin");
-                return View();
+                {
+                    ModelState.AddModelError("", "Vui lòng nhập đủ thông tin");
+                    return View();
+                }
+                if(newPassword == oldPassword)
+                {
+                    ModelState.AddModelError("", "Mật khẩu mới không được trùng với mật khẩu cũ");
+                    return View();
+                }
+                var check = UserAccountService.ChangePassword(AccountTypes.Employee, userName, oldPassword, newPassword);
+                if (check == false)
+                {
+                    ModelState.AddModelError("", "Mật khẩu cũ không đúng");
+                    return View();
+                }
+                return RedirectToAction("Logout");
+
             }
-            var check = UserAccountService.ChangePassword(AccountTypes.Employee, userName, oldPassword, newPassword);
-            if (check == false)
-            {
-                ModelState.AddModelError("", "Mật khẩu cũ không đúng");
-                return View();
-            }
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Logout");
+            return View();
+
         }
 
     }
